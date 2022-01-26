@@ -1,23 +1,26 @@
 <template>
   <h1>Reaction Timer game</h1>
   <button @click="start" :disabled="isPlaying">Play</button>
-  <Block v-if="isPlaying" :delay="delay" @end="endGame" />
+  <Block v-if="isPlaying" :delay="delay" @end="endGame" @removePressHere="removePressHere" />
+  <PressHere v-if="isPressHere" />
   <Results v-if="showResults" :score="score" />
 </template>
 
 <script>
 import Block from "./components/Block.vue";
+import PressHere from "./components/PressHere.vue";
 import Results from "./components/Results.vue";
 
 export default {
   name: "App",
-  components: { Block, Results },
+  components: { Block, Results, PressHere },
   data() {
     return {
       isPlaying: false,
       delay: null,
       score: null,
       showResults: false,
+      isPressHere: true,
     };
   },
   methods: {
@@ -31,6 +34,9 @@ export default {
       this.isPlaying = false;
       this.showResults = true;
     },
+    removePressHere(value) {
+      this.isPressHere = value
+    }
   },
 };
 </script>

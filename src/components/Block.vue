@@ -20,6 +20,7 @@ export default {
   },
   methods: {
     startTimer() {
+      this.$emit("removePressHere", false);
       this.timer = setInterval(() => {
         this.reactionTime += 10;
       }, 10);
@@ -27,7 +28,8 @@ export default {
     stopTimer() {
       clearInterval(this.timer);
       this.$emit("end", this.reactionTime);
-    },
+      this.$emit("removePressHere", true);
+    }
   },
 };
 </script>
